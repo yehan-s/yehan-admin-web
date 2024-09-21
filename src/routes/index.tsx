@@ -1,17 +1,14 @@
-import { DashboardOutlined, TableOutlined } from '@ant-design/icons'
-import { lazy } from 'react'
-import { Navigate } from 'react-router-dom'
+import Result404 from '@/pages/404'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
-export interface MenuItem {
-  path: string
-  title?: string
-  icon?: any
-  element?: any
-  children?: MenuItem[]
-  layout?: boolean
-  Componenet?: any
+const Router = () => {
+  const router = createBrowserRouter([
+    {
+      path: '*',
+      Component: Result404,
+    },
+  ])
+  return <RouterProvider router={router} />
 }
 
-export const routeConfig: MenuItem[] = [
-
-]
+export default Router

@@ -1,25 +1,15 @@
-import { RouterProvider, createHashRouter } from 'react-router-dom'
-
 import './App.css'
+import { ConfigProvider, App as AntdApp } from 'antd'
+import Router from './routes'
 
 function App() {
-  const router = createHashRouter([
-    {
-      path: '/user/login',
-      // Component: Login,
-    },
-    {
-      path: '/',
-      // Component: BasicLayout,
-      // children: routeConfig,
-    },
-    {
-      path: '*',
-      // Component: Result404,
-    },
-  ])
-
-  return <RouterProvider router={router} />
+  return (
+    <ConfigProvider>
+      <AntdApp>
+        <Router></Router>
+      </AntdApp>
+    </ConfigProvider>
+  )
 }
 
 export default App
