@@ -4,15 +4,32 @@ import { IconFangdajing } from '@/assets/icons/fangdajing'
 import { IconJiaretaiyang } from '@/assets/icons/jiaretaiyang'
 import { IconShuyi_fanyi36 } from '@/assets/icons/shuyi_fanyi-36'
 import { defaultSetting } from '@/default-setting'
+import loginService from '@/pages/login/service'
 import { useGlobalStore } from '@/stores/global'
+import { useUserStore } from '@/stores/global/user'
 import { i18n } from '@/utils/i18n'
 import { BellOutlined, MenuOutlined, SettingOutlined } from '@ant-design/icons'
-import { Input, Dropdown } from 'antd'
+import { useRequest } from 'ahooks'
+import { Input, Dropdown, Button } from 'antd'
 import { t } from 'i18next'
 import { memo } from 'react'
 
 const Header = () => {
   const { darkMode, collapsed, setCollapsed, setDarkMode, setLang, lang } = useGlobalStore()
+
+  const { currentUser } = useUserStore()
+
+  const { runAsync } = useRequest(loginService.logout, { manual: true })
+
+  const logout = async () => {
+    const [error] = await runAsync()
+    if (error) return
+
+    useGlobalStore.setState({
+      token: '',
+      refreshToken: '',
+    })
+  }
 
   return (
     <div
@@ -105,7 +122,28 @@ const Header = () => {
                       : 'rgba(0, 0, 0, 0.08) 0px 6px 30px',
                   }}
                   className="dark:bg-[rgb(33,41,70)] bg-white rounded-lg w-[200px]"
-                ></div>
+                >
+                  <div className="p-[16px]">
+                    <p className="text-[16px] dark:text-[rgb(237,242,247)] text-[rgb(17,25,39)] ">
+                      {currentUser?.nickName}
+                    </p>
+                    <p className="text-[rgb(108,115,127)] dark:text-[rgb(160,174,192)] mt-[10px]">
+                      {currentUser?.phoneNumber}
+                    </p>
+                    <p className="text-[rgb(108,115,127)] dark:text-[rgb(160,174,192)] mt-[0px]">
+                      {currentUser?.email}
+                    </p>
+                  </div>
+                  <hr
+                    style={{ borderWidth: '0 0 thin' }}
+                    className="m-[0] border-solid dark:border-[rgb(45,55,72)] border-[rgb(242,244,247)]"
+                  />
+                  <div className="p-[16px] text-center">
+                    <Button onClick={logout} type="text" size="small">
+                      退出登录
+                    </Button>
+                  </div>
+                </div>
               )
             }}
           >

@@ -15,7 +15,11 @@ const UserPage: React.FC = () => {
   const {
     tableProps,
     search: { submit, reset },
-  } = useAntdTable(userService.getUserListByPage, { defaultPageSize: 10, form })
+  } = useAntdTable(userService.getUserListByPage, {
+    // 只能通过这样修改ahooks的默认current参数
+    defaultParams: [{ current: 1 + 1, pageSize: 5 }, form],
+  })
+
   const { runAsync: deleteUser } = useRequest(userService.deleteUser, { manual: true })
   const [editData, setEditData] = useState<User | null>(null)
   const [saveLoading, setSaveLoading] = useState(false)

@@ -19,6 +19,7 @@ const Login = () => {
 
   const onFinish = async (values: LoginDTO) => {
     if (!captcha?.data) {
+      console.log('没有生成验证码')
       return
     }
 
@@ -31,6 +32,7 @@ const Login = () => {
     const password = encrypt.encrypt(values.password)
 
     if (!password) {
+      console.log('密码加密失败')
       return
     }
     values.password = password
@@ -38,12 +40,10 @@ const Login = () => {
 
     try {
       const { data } = await login(values)
-      console.log(data)
       setToken(data.token)
       setRefreshToken(data.refreshToken)
       navigate('/')
     } catch (error: any) {
-      console.log(error)
       message.error(
         error.response?.data?.messages ? error.response?.data?.messages.message[0] : error.response.data.message
       )

@@ -144,7 +144,7 @@ const Dashboard: React.FC = () => {
               <div className="mt-[10px] text-[rgb(66,66,66)]">{t("NINmWqBr" /* 20% 利润 */)}</div>
             </div>
             <div className="dark:bg-[rgb(209,196,233)] bg-[rgb(237,231,246)] rounded-b-lg">
-              <DemoTinyArea />
+              {/* <DemoTinyArea /> */}
             </div>
             <div className="py-[24px]">
               <div>

@@ -27,9 +27,9 @@ export const useGlobalStore = create<State & Action>()(
           lang: 'zh-CN',
           token: '',
           refreshToken: '',
-          setDarkMode: (darkMode: State['darkMode']) => set(() => ({ darkMode })),
-          setCollapsed: (collapsed: State['collapsed']) => set(() => ({ collapsed })),
-          setLang: (lang: State['lang']) => set(() => ({ lang })),
+          setDarkMode: (darkMode: State['darkMode']) => set({ darkMode }),
+          setCollapsed: (collapsed: State['collapsed']) => set({ collapsed }),
+          setLang: (lang: State['lang']) => set({ lang }),
           setToken: (token: State['token']) =>
             set({
               token,

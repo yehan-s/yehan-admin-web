@@ -27,11 +27,6 @@ export interface User {
   createDate: string
   updateDate: string
   avatar?: string
-  menus: Menu[]
-  routes: any[]
-  flatMenus: Menu[]
-  avatarPath: string
-  authList: string[]
 }
 
 export interface pageData {
@@ -73,6 +68,10 @@ const userService = {
   // 验证码
   getCaptcha: () => {
     return axios.get('/api/auth/captcha')
+  },
+  //获取当前用户信息
+  getUserInfo: () => {
+    return axios.get<User>('/api/auth/current/user')
   },
 }
 

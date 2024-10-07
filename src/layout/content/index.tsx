@@ -17,13 +17,13 @@ const Content: FC<any> = ({ children }) => {
         marginLeft: collapsed ? 112 : defaultSetting.slideWidth,
         minHeight: 'calc(100vh - 80px)',
         transition: 'all 200ms cubic-bezier(0.4, 0, 0.6, 1) 0ms',
-        width: `calc(100vw - ${isPC ? (collapsed ? 112 : defaultSetting.slideWidth) : 0})`,
+        width: `calc(100vw - ${isPC ? (collapsed ? 112 : defaultSetting.slideWidth) : 32}px)`,
       }}
     >
       <div className="m-0 rounded-md z-1 p-[0px]">
         <Suspense fallback={<Loading />}>
           {children}
-          <Outlet></Outlet>
+          <Outlet />
         </Suspense>
       </div>
     </div>

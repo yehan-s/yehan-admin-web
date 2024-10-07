@@ -36,6 +36,16 @@ const loginService = {
   getPublicKey: () => {
     return axios.get<string>('/api/auth/publicKey')
   },
+
+  //刷新token
+  rerefshToken(refreshToken: string) {
+    return axios.post<TokenDTO>('/api/auth/refresh/token', { refreshToken })
+  },
+
+  //退出登录
+  logout() {
+    return axios.post<TokenDTO>('api/auth/logout')
+  },
 }
 
 export default loginService
